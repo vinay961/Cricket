@@ -26,9 +26,8 @@ function Home() {
         </div>
       </div>
 
-      {/* Main content */}
       <div className="flex-grow">
-        {/* Your main content goes here */}
+        {/* main content goes here */}
       </div>
 
       {/* Footer */}
