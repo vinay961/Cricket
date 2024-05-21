@@ -26,11 +26,15 @@ function Home() {
         </div>
       </div>
 
-      <div className="flex-grow">
-        {/* main content goes here */}
+      <div className="flex-grow flex items-center justify-center">
+        <button
+          className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
+          onClick={() => navigate('/match-schedule')}
+        >
+          View Match Schedule
+        </button>
       </div>
 
-      {/* Footer */}
       <footer className="bg-gray-900 text-white py-4 text-center">
         <p>&copy; {new Date().getFullYear()} DHEKHO. All rights reserved.</p>
       </footer>

@@ -17,14 +17,12 @@ const AdminDashboard = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const accessToken = localStorage.getItem('accessToken'); // Assuming the token is stored in localStorage
 
     try {
       const response = await fetch('http://localhost:7000/app/admin/add', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${accessToken}` // Include the accessToken in the Authorization header
         },
         body: JSON.stringify(formData)
       });
