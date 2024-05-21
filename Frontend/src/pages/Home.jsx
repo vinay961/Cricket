@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import LiveScore from '../components/LiveScore';
 
 function Home() {
   const navigate = useNavigate();
@@ -25,6 +26,8 @@ function Home() {
           </button>
         </div>
       </div>
+
+      <LiveScore />
 
       <div className="flex-grow flex items-center justify-center">
         <button

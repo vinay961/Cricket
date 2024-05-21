@@ -20,6 +20,7 @@ const AdminDashboard = () => {
 
     try {
       const response = await fetch('http://localhost:7000/app/admin/add', {
+        credentials: 'include',
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -37,7 +38,7 @@ const AdminDashboard = () => {
         alert(data.message || 'Something went wrong');
       }
     } catch (error) {
-      console.error('Error:', error);
+      console.log('Error:', error);
       alert('Network error');
     }
   };
