@@ -41,7 +41,7 @@ function LiveScore() {
   }, []);
 
   return (
-    <div className="live-score bg-gray-900 text-white p-6 rounded-lg shadow-lg">
+    <div className="live-score bg-gray-900 text-white p-6 rounded-lg shadow-lg mt-2">
       <h2 className="text-3xl font-bold mb-6">Live IPL Matches</h2>
       {error ? (
         <div className="error-message bg-red-500 p-4 rounded">{error}</div>
