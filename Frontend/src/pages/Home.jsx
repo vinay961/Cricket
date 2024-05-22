@@ -1,9 +1,41 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LiveScore from '../components/LiveScore';
 
 function Home() {
   const navigate = useNavigate();
+  const [isUser,setUser] = useState(false);
+
+  const checkUser = async() => {
+    try {
+      const response = await fetch('http://localhost:7000/app/authUser',{
+        method:'GET',
+        credentials:"include"
+      })
+      if(response.status == 200){
+        setUser(true);
+      }
+    } catch (error) {
+      console.log("Something is wrong during user verification.");
+    }
+  }
+
+  useEffect(() => {
+    checkUser();
+  }, []); 
+
+  const handleLogout = async() => {
+    const response = await fetch("http://localhost:7000/app/logout",{
+      method:"POST",
+      credentials:"include"
+    })
+
+    if(response.status == 200){
+      setUser(false)
+    }
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -12,18 +44,29 @@ function Home() {
           <h1 className="text-3xl font-bold">DHEKHO</h1>
         </div>
         <div className="nav flex space-x-4">
-          <button
-            className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded"
-            onClick={() => navigate('/login')}
+          {isUser ? (
+            <button
+            className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded"
+            onClick={handleLogout}
           >
-            LOGIN
+            LOGOUT
           </button>
-          <button
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
-            onClick={() => navigate('/register')}
-          >
-            REGISTER
-          </button>
+          ) : (
+            <>
+              <button
+                className="bg-indigo-500 hover:bg-indigo-600 text-white font-semibold py-2 px-4 rounded"
+                onClick={() => navigate('/login')}
+              >
+                LOGIN
+              </button>
+              <button
+                className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded"
+                onClick={() => navigate('/register')}
+              >
+                REGISTER
+              </button>
+            </>
+          )}
         </div>
       </div>
 

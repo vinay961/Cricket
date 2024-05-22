@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const AdminDashboard = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     teams: '',
     date: '',
@@ -42,7 +44,7 @@ const AdminDashboard = () => {
       alert('Network error');
     }
   };
-
+  
   return (
     <div className="bg-gray-900 h-screen text-white flex">
       {/* Sidebar */}
@@ -56,7 +58,7 @@ const AdminDashboard = () => {
               <a href="#">Dashboard Overview</a>
             </li>
             <li className="py-2 px-4 hover:bg-gray-600">
-              <a href="#">Matches</a>
+              <a onClick={() => {navigate('/match-schedule') }} >Matches</a>
             </li>
             <li className="py-2 px-4 hover:bg-gray-600">
               <a href="#">Teams</a>
