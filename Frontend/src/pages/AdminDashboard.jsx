@@ -61,7 +61,7 @@ const AdminDashboard = () => {
               <a onClick={() => {navigate('/match-schedule') }} >Matches</a>
             </li>
             <li className="py-2 px-4 hover:bg-gray-600">
-              <a href="#">Teams</a>
+              <a onClick={()=>{navigate('/player')}} >Players</a>
             </li>
             <li className="py-2 px-4 hover:bg-gray-600">
               <a href="#">Scores</a>

@@ -5,6 +5,7 @@ import Home from './pages/Home.jsx';
 import MatchSchedule from './pages/MatchSchedule.jsx'
 import Login from './pages/Login.jsx';
 import Register from './pages/Register.jsx';
+import PlayerCareer from './components/PlayerCareer.jsx';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
         <Route path="/match-schedule" element={<MatchSchedule />} />
         <Route path="/register" element={<Register />} />
         <Route path='/admindashboard' element={<AdminDashboard />} />
+        <Route path='/player' element={< PlayerCareer />} />
+
       </Routes>
     </Router>
   );
