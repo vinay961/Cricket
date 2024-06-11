@@ -1,28 +1,27 @@
-// src/TeamDetail.js
+// src/PlayerCareer.js
 
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 const PlayerCareer = () => {
-  const [teamData, setTeamData] = useState(null);
+  const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchTeamDetails = async () => {
+    const fetchCricketNews = async () => {
       const options = {
         method: 'GET',
-        url: 'https://livescore6.p.rapidapi.com/teams/detail',
-        params: { ID: '3339' },
+        url: 'https://cricbuzz-cricket.p.rapidapi.com/news/v1/index',
         headers: {
           'X-RapidAPI-Key': 'fc024eb85emsh801def950023b58p1225b8jsn386059591f49',
-          'X-RapidAPI-Host': 'livescore6.p.rapidapi.com'
+          'X-RapidAPI-Host': 'cricbuzz-cricket.p.rapidapi.com'
         }
       };
 
       try {
         const response = await axios.request(options);
-        setTeamData(response.data);
+        setNews(response.data);
         setLoading(false);
       } catch (error) {
         setError(error);
@@ -30,24 +29,32 @@ const PlayerCareer = () => {
       }
     };
 
-    fetchTeamDetails();
+    fetchCricketNews();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error fetching data: {error.message}</p>;
+  if (loading) return <p className="text-white">Loading...</p>;
+
+  if (error) {
+    return (
+      <div className="bg-gray-900 min-h-screen flex items-center justify-center">
+        <p className="text-red-500">Error fetching data: {error.message}</p>
+      </div>
+    );
+  }
 
   return (
-    <div>
-      <h1>Team Details</h1>
-      {teamData && (
-        <div>
-          <h2>{teamData.team.name}</h2>
-          <p><strong>Country:</strong> {teamData.team.country}</p>
-          <p><strong>Founded:</strong> {teamData.team.founded}</p>
-          <p><strong>Venue:</strong> {teamData.team.venue.name}</p>
-          <p><strong>Capacity:</strong> {teamData.team.venue.capacity}</p>
-          {/* Add more team details as needed */}
-        </div>
+    <div className="bg-gray-900 min-h-screen p-8">
+      <h1 className="text-2xl text-white mb-4">Cricket News</h1>
+      {news.length > 0 && (
+        <ul className="text-white">
+          {news.map((article) => (
+            <li key={article.id} className="mb-4">
+              <p><strong>Title:</strong> {article.headline}</p>
+              <p><strong>Summary:</strong> {article.summary}</p>
+              <a href={article.url} target="_blank" rel="noopener noreferrer" className="text-blue-400">Read more</a>
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

@@ -21,7 +21,7 @@ function LiveScore() {
         console.log(response.data);
 
         if (response.data.res && Array.isArray(response.data.res.matches)) {
-          const iplMatches = response.data.res.matches.filter(match => match.srsKey === 'ipl_2024' && match.matchStatus === 'live');
+          const iplMatches = response.data.res.matches.filter(match => match.matchStatus === 'live' || 'upcoming');
           setLiveMatches(iplMatches);
         } else {
           setError('No live matches currently available.');
